@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5720524739079430812}
   - component: {fileID: 5720524739079430801}
   - component: {fileID: 5720524739079430811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +122,7 @@ MonoBehaviour:
   destroyOnDeath: 1
   deathPartiPrefab: {fileID: 6152200297220633451, guid: 59a531cda16e6da4280c4e06243b77b5, type: 3}
   _hp: 100
+  affil: 0
 --- !u!1 &5720524740469780113
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5720524740469780114}
   - component: {fileID: 5720524740469780115}
-  m_Layer: 0
-  m_Name: bluecargoship
+  m_Layer: 7
+  m_Name: enemyship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,8 +191,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2087003379
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 92d0d6e75ee41d744ac646d989677117, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

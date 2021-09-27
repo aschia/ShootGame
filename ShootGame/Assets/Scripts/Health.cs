@@ -17,6 +17,12 @@ public class Health : MonoBehaviour
     public bool destroyOnDeath = true;
     public GameObject deathPartiPrefab = null;
     [SerializeField] private float _hp = 0;        // i have no idea why we were instructed to make it a float what the
+    public int affil = 0;               // affiliation
+    enum affils
+    {
+        enemy = 0,
+        ally = 1,
+    }
 
     public float hp {
         get { return _hp; }

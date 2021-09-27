@@ -16,6 +16,12 @@ public class Bullet : MonoBehaviour
     // vars
     public float dmg = 100f;
     public float lifetime = 2f;
+    public int affil = -1;
+    enum affils
+    {
+        enemy = 0,
+        ally = 1,
+    }
 
     private void OnEnable()
     {
@@ -25,9 +31,20 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (affil == -1)
+        {
+            Health Hpref = other.gameObject.GetComponent<Health>();
+            affil = Hpref.affil;
+            return;
+        }
+
         Health H = other.gameObject.GetComponent<Health>();
-        H.hp -= dmg;
-        Die();
+        if (affil != H.affil)
+        {
+            Debug.Log("bullet affil: " + affil + ", target affil: " + H.affil);
+            H.hp -= dmg;
+            Die();
+        }
     }
 
     void Die()

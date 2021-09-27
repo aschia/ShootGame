@@ -12,7 +12,6 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         origin = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log("lol");
     }
 
     // Start is called before the first frame update
@@ -28,5 +27,12 @@ public class Spawner : MonoBehaviour
         Vector3 spawnPos = origin.position + Random.onUnitSphere * maxRadius;
         spawnPos = new Vector3(spawnPos.x, 0f, spawnPos.z);
         Instantiate(spawnObj, spawnPos, Quaternion.identity);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Vector3 centerp = new Vector3(transform.position.x, 0.0f, transform.position.y);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(centerp, new Vector3(maxRadius, 0.0f, maxRadius));
     }
 }

@@ -2,7 +2,7 @@
  * Created by aschia
  * Date Created: Sept 13
  * 
- * Last Edited: Sept 15
+ * Last Edited: Sept 27
  * 
  * Desc: Player movements n stuff
  */
@@ -18,15 +18,24 @@ public class PlayerController : MonoBehaviour
     public bool mouseLook = true;
     public string HorzAxis = "Horizontal";
     public string VertAxis = "Vertical";
-    public string FireAxis = "Fire1";
+    public string FireAxis = "Jump";
     public float MaxSpeed = 5f;
 
+    public float shotDelay = 0.2f;
+    public bool canFire = true;
+    public Transform[] turretTransforms;
+
+    [SerializeField] private bool doTankControls = false;
+
     Rigidbody rgbdy = null;
+    Health hlth = null;
 
     // Rise and shine
     void Awake()
     {
         rgbdy = GetComponent<Rigidbody>();
+        hlth = GetComponent<Health>();
+        hlth.affil = 1;
     }
 
     // Start is called before the first frame update
@@ -35,19 +44,50 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetButton(FireAxis) && canFire)
+        {
+            foreach(Transform T in turretTransforms)
+            {
+                AmmoManager.SpawnAmmo(T.position,T.rotation,1);
+            }
+            canFire = false;
+            Invoke("EnableFire", shotDelay);
+        }
+    }
+
+    void EnableFire()
+    {
+        canFire = true;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         // var setup
-        float hsp = Input.GetAxis(HorzAxis);
-        float vsp = Input.GetAxis(VertAxis);
+        float hsp = 0;
+        float vsp = 0;
 
-        Vector3 dir = new Vector3(hsp, 0.0f, vsp);
+        if (doTankControls)
+        {
+            hsp = Input.GetAxis(HorzAxis);
+            vsp = Input.GetAxis(VertAxis);
 
-        // move
-        rgbdy.AddForce(dir.normalized*MaxSpeed);
-        rgbdy.velocity = new Vector3(Mathf.Clamp(rgbdy.velocity.x, -MaxSpeed, MaxSpeed),
-            Mathf.Clamp(rgbdy.velocity.y, -MaxSpeed, MaxSpeed),Mathf.Clamp(rgbdy.velocity.z, -MaxSpeed, MaxSpeed));
+            Vector3 dir = new Vector3(hsp, 0.0f, vsp);
+
+            //move
+            rgbdy.AddForce(dir.normalized * MaxSpeed);
+            rgbdy.velocity = new Vector3(Mathf.Clamp(rgbdy.velocity.x, -MaxSpeed, MaxSpeed),
+                Mathf.Clamp(rgbdy.velocity.y, -MaxSpeed, MaxSpeed), Mathf.Clamp(rgbdy.velocity.z, -MaxSpeed, MaxSpeed));
+        }
+        else
+        {
+            hsp = Input.GetAxisRaw(HorzAxis);
+            vsp = Input.GetAxisRaw(VertAxis);
+
+            rgbdy.velocity = new Vector3(hsp * MaxSpeed, 0.0f, vsp * MaxSpeed);
+        }
 
         // mouse
         if (mouseLook)
@@ -67,6 +107,16 @@ public class PlayerController : MonoBehaviour
             rgbdy.velocity = Vector3.zero;
             this.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
+
+        /*if (Input.GetButtonDown(FireAxis) && canFire)
+        {
+            foreach (Transform T in turretTransforms)
+            {
+                AmmoManager.SpawnAmmo(T.position, T.rotation, 1);
+            }
+            canFire = false;
+            Invoke("EnableFire", shotDelay);
+        }*/
     }
 
     /*private void OnDrawGizmos()

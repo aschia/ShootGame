@@ -31,32 +31,48 @@ public class AmmoManager : MonoBehaviour
 
     public GameObject ammoPrefab = null;
     public int poolSize = 100;
-    public Queue<Transform> ammoQueue;
+    public Queue<Transform> ammoQueue = new Queue<Transform>();
 
-    private GameObject[] ammoArray;
+    public GameObject[] ammoArray;
 
     private void Awake()
     {
-        SetAmmoManager();
+        //SetAmmoManager();
 
-        if (AmmoManagerSingleton == null) return;
+        //if (AmmoManagerSingleton == null) return;
+        if (AmmoManagerSingleton != null)
+        {
+            Destroy(GetComponent<AmmoManager>());
+            return;
+        }
 
+        AmmoManagerSingleton = this;
         ammoArray = new GameObject[poolSize];
         for (int i = 0; i < poolSize; i++)
         {
-            ammoArray[i] = Instantiate(ammoPrefab, Vector3.zero, Quaternion.identity, transform) as GameObject;
+            GameObject obj = Instantiate(ammoPrefab, Vector3.zero, Quaternion.identity, this.transform);
+            ammoArray[i] = obj;
             Transform objTransform = ammoArray[i].transform;
 
-            ammoQueue.Enqueue(objTransform);
-            ammoArray[i].SetActive(false);
+            if (objTransform != null)
+            {
+                ammoQueue.Enqueue(objTransform);
+                ammoArray[i].SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Something went wrong queueing projectile slots.");
+            }
         }
     }
-    public static Transform SpawnAmmo(Vector3 pos, Quaternion rot)
+    public static Transform SpawnAmmo(Vector3 pos,Quaternion rot,int affil)
     {
         Transform spawnedAmmo = AmmoManagerSingleton.ammoQueue.Dequeue();
+
         spawnedAmmo.gameObject.SetActive(true);
         spawnedAmmo.position = pos;
         spawnedAmmo.localRotation = rot;
+        spawnedAmmo.GetComponent<Bullet>().affil = affil;
         AmmoManagerSingleton.ammoQueue.Enqueue(spawnedAmmo);
 
         return spawnedAmmo;
