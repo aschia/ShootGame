@@ -125,4 +125,10 @@ public class PlayerController : MonoBehaviour
         mouseposworld = new Vector3(mouseposworld.x, 0.0f, mouseposworld.z);
         Gizmos.DrawCube(mouseposworld, Vector3.one);
     }*/
+
+    private void OnDestroy()
+    {
+        GameManager.GameOver();
+        GameManager.isPlayerDead = true;
+    }
 }

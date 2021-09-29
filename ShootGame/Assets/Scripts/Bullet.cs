@@ -39,6 +39,8 @@ public class Bullet : MonoBehaviour
         }
 
         Health H = other.gameObject.GetComponent<Health>();
+        if (H == null) return;
+
         if (affil != H.affil)
         {
             Debug.Log("bullet affil: " + affil + ", target affil: " + H.affil);

@@ -37,9 +37,9 @@ public class AmmoManager : MonoBehaviour
 
     private void Awake()
     {
-        //SetAmmoManager();
+        /*SetAmmoManager();
 
-        //if (AmmoManagerSingleton == null) return;
+        if (AmmoManagerSingleton == null) return;*/
         if (AmmoManagerSingleton != null)
         {
             Destroy(GetComponent<AmmoManager>());
@@ -47,6 +47,8 @@ public class AmmoManager : MonoBehaviour
         }
 
         AmmoManagerSingleton = this;
+
+
         ammoArray = new GameObject[poolSize];
         for (int i = 0; i < poolSize; i++)
         {
