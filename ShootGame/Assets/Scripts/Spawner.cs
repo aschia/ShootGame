@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public float maxRadius = 1f;
     public float interval = 5f;
-    public GameObject spawnObj = null;
+    public GameObject[] spawnObj = null;
     private Transform origin = null;
 
     private void Awake()
@@ -24,9 +24,11 @@ public class Spawner : MonoBehaviour
     {
         if (origin == null) return;
 
+        int spawnChoice = Random.Range(0, spawnObj.Length);
+
         Vector3 spawnPos = origin.position + Random.onUnitSphere * maxRadius;
         spawnPos = new Vector3(spawnPos.x, 0f, spawnPos.z);
-        Instantiate(spawnObj, spawnPos, Quaternion.identity);
+        Instantiate(spawnObj[spawnChoice], spawnPos, Quaternion.identity);
     }
 
     private void OnDrawGizmosSelected()

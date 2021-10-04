@@ -75,7 +75,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &6065449093234150967
 MonoBehaviour:
@@ -92,6 +92,12 @@ MonoBehaviour:
   dmg: 25
   lifetime: 200
   affil: -1
+  flashtime: 0.25
+  sprend: {fileID: 0}
+  spranim:
+  - {fileID: 210588679149098145, guid: 20049489497a2214dbe4237115d1ad7b, type: 3}
+  - {fileID: -7509381387061955075, guid: ce5690335ee1cbe42b7d3dafe1059a54, type: 3}
+  - {fileID: 8227875287966639881, guid: ce5690335ee1cbe42b7d3dafe1059a54, type: 3}
 --- !u!1 &6065449093432425058
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: 341313379
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2489156501498155838, guid: 20049489497a2214dbe4237115d1ad7b, type: 3}
+  m_Sprite: {fileID: 210588679149098145, guid: 20049489497a2214dbe4237115d1ad7b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

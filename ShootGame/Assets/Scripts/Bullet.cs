@@ -17,6 +17,12 @@ public class Bullet : MonoBehaviour
     public float dmg = 100f;
     public float lifetime = 2f;
     public int affil = -1;
+    public float flashtime = 0.25f;
+
+    public SpriteRenderer sprend = null;
+
+    public Sprite[] spranim = null;
+
     enum affils
     {
         enemy = 0,
@@ -27,6 +33,25 @@ public class Bullet : MonoBehaviour
     {
         CancelInvoke();
         Invoke("Die", lifetime);
+
+        if (sprend == null) sprend = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        if (spranim == null) spranim = new Sprite[] { sprend.sprite };
+        InvokeRepeating("Flash", 0f, flashtime);
+    }
+
+    private void Flash()
+    {
+        Debug.Log("flash");
+        if (affil == 1)
+        {
+            sprend.sprite = spranim[0];
+            CancelInvoke("Flash");
+            return;
+        }
+
+        if (sprend.sprite == spranim[1]) sprend.sprite = spranim[2];
+        else sprend.sprite = spranim[1];
     }
 
     private void OnTriggerEnter(Collider other)
