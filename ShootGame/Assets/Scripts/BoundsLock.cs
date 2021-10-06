@@ -14,9 +14,11 @@ using UnityEngine;
 public class BoundsLock : MonoBehaviour
 {
     public Rect levelBounds;    // x,y,w,&h of the bounding rectangle
+    public Transform background;
 
     void LateUpdate()
     {
+        levelBounds.y = background.position.y;
         transform.position = new Vector3(Mathf.Clamp(transform.position.x,levelBounds.xMin,levelBounds.xMax), 
             transform.position.y, Mathf.Clamp(transform.position.z,levelBounds.yMin,levelBounds.yMax));
     }

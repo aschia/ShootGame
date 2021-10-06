@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         if (gm.GameOverText != null)
         {
             gm.GameOverText.gameObject.SetActive(true);
+            gm.GameOverText.text = "GAME OVER\n<size=48>Score: " + Score+"</size>";
         }
 
         if (isPlayerDead)
