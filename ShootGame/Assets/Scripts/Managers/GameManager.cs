@@ -25,7 +25,9 @@ public class GameManager : MonoBehaviour
 
     public static int Score;
     public string scorePrefix = string.Empty;
+    public string healthPrefix = string.Empty;
     public TMP_Text ScoreText = null;
+    public TMP_Text HealthText = null;
     public TMP_Text GameOverText = null;
     public static bool isPlayerDead = false;
     public GameObject Player = null;
@@ -47,6 +49,11 @@ public class GameManager : MonoBehaviour
         if (ScoreText != null)
         {
             ScoreText.text = scorePrefix + Score.ToString();
+        }
+        if (HealthText != null)
+        {
+            if (Player != null) HealthText.text = healthPrefix + Player.gameObject.GetComponent<Health>().hp.ToString();
+            else HealthText.text = "Health: 0";
         }
     }
 

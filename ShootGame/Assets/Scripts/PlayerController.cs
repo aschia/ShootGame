@@ -50,7 +50,9 @@ public class PlayerController : MonoBehaviour
         {
             foreach(Transform T in turretTransforms)
             {
-                AmmoManager.SpawnAmmo(T.position,T.rotation,1);
+                Transform bullet = AmmoManager.SpawnAmmo(T.position, T.rotation, 1);
+                bullet.GetComponent<Bullet>().enabled = false;
+                bullet.GetComponent<Bullet>().enabled = true;
             }
             canFire = false;
             Invoke("EnableFire", shotDelay);

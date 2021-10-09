@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gunner : MonoBehaviour
+public class FireBreather : MonoBehaviour
 {
-    public float shotDelay = 2f;
-    public int shotsPerBurst = 3;
-    bool canFire = false;
-    float cooldown = 0;
+    public float shotDelay = 0.2f;
+    bool canFire = true;
     Mover mv = null;
 
     public Transform[] turretTransforms;
@@ -24,36 +22,23 @@ public class Gunner : MonoBehaviour
     {
         if (canFire)
         {
-            if (cooldown > 0)
-            {
-                cooldown -= Time.deltaTime;
-                return;
-            }
-
             foreach (Transform T in turretTransforms)
             {
                 Transform bullet = AmmoManager.SpawnAmmo(T.position, T.rotation, 0);
                 bullet.GetComponent<Bullet>().affil = 0;
-                bullet.eulerAngles = new Vector3(0, bullet.eulerAngles.y, 0);
-                bullet.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
+                bullet.GetComponent<Bullet>().lifetime = 0.5f;
                 bullet.GetComponent<Bullet>().enabled = false;
                 bullet.GetComponent<Bullet>().enabled = true;
+                bullet.eulerAngles = new Vector3(0, bullet.eulerAngles.y, 0);
             }
-            cooldown = shotDelay / shotsPerBurst;
+            canFire = false;
+            Invoke("EnableFire", shotDelay);
         }
     }
 
     void EnableFire()
     {
         canFire = true;
-        mv.enabled = false;
-        Invoke("EnableMove", shotDelay);
     }
 
-    void EnableMove()
-    {
-        canFire = false;
-        mv.enabled = true;
-        Invoke("EnableFire",shotDelay);
-    }
 }

@@ -64,10 +64,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.7920191
+  m_Height: 1.5840383
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.29201913}
 --- !u!114 &5720524739079430800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,9 +134,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
+  canBeHit: 1
   deathPartiPrefab: {fileID: 6152200297220633451, guid: 59a531cda16e6da4280c4e06243b77b5, type: 3}
-  _hp: 100
+  _hp: 50
   affil: 0
+  invulnTime: 0.2
 --- !u!1 &5720524740469780113
 GameObject:
   m_ObjectHideFlags: 0

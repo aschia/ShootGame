@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     public float maxRadius = 1f;
     public float interval = 5f;
     public GameObject[] spawnObj = null;
+    public float[] intervalMultis = null;
     private Transform origin = null;
 
     private void Awake()
@@ -17,7 +18,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Spawn", 0f, interval);
+        Invoke("Spawn",interval);
     }
 
     void Spawn()
@@ -28,7 +29,16 @@ public class Spawner : MonoBehaviour
 
         Vector3 spawnPos = origin.position + Random.onUnitSphere * maxRadius;
         spawnPos = new Vector3(spawnPos.x, 0f, spawnPos.z);
+
+        if (Mathf.Abs(Vector3.Distance(spawnPos, origin.position)) < 10) {
+            Spawn();
+            return;
+        }
+
         Instantiate(spawnObj[spawnChoice], spawnPos, Quaternion.identity);
+
+        if (intervalMultis != null) Invoke("Spawn", interval * intervalMultis[spawnChoice]);
+        else Invoke("Spawn", interval);
     }
 
     private void OnDrawGizmosSelected()

@@ -76,6 +76,9 @@ public class Bullet : MonoBehaviour
 
     void Die()
     {
+        this.transform.localScale = Vector3.one;
+        this.lifetime = 2f;
+        this.affil = 0;
         this.gameObject.SetActive(false);
     }
 }
