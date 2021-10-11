@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text GameOverText = null;
     public static bool isPlayerDead = false;
     public GameObject Player = null;
+    public bool bossDefeated = false;
 
     void Awake()
     {
@@ -62,7 +63,8 @@ public class GameManager : MonoBehaviour
         if (gm.GameOverText != null)
         {
             gm.GameOverText.gameObject.SetActive(true);
-            gm.GameOverText.text = "GAME OVER\n<size=48>Score: " + Score+"</size>";
+            if (gm.bossDefeated) gm.GameOverText.text = "YOU WIN!\n<size=48>Score: " + Score + "</size>";
+            else gm.GameOverText.text = "GAME OVER\n<size=48>Score: " + Score+"</size>";
         }
 
         if (isPlayerDead)

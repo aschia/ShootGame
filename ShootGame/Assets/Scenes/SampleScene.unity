@@ -640,17 +640,15 @@ MonoBehaviour:
   maxRadius: 20
   interval: 3
   spawnObj:
-  - {fileID: 5720524739079430810, guid: b4daeee47baa608428eb55b3c1bd4849, type: 3}
-  - {fileID: 8634832662729636354, guid: 2790be0643f76ff4c9cdd35d32e54e13, type: 3}
-  - {fileID: 7584132826015924817, guid: 2e520a34cba35e649b762dea12597f5a, type: 3}
-  - {fileID: 8305798741548600600, guid: d9cfdc77342da424fa1bb380ae2c1929, type: 3}
   - {fileID: 1604122760134995076, guid: 8f8734f145d499644b93a783421ecd83, type: 3}
   intervalMultis:
-  - 0.5
+  - 0.25
+  - 0.75
   - 1.5
-  - 3
-  - 0.125
-  - 30
+  - 0.0625
+  - 0.0625
+  - 5
+  - 15
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +866,7 @@ MonoBehaviour:
   HealthText: {fileID: 11060163}
   GameOverText: {fileID: 1646074112}
   Player: {fileID: 2079557999}
+  bossDefeated: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

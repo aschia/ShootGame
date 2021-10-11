@@ -26,10 +26,12 @@ public class FireBreather : MonoBehaviour
             {
                 Transform bullet = AmmoManager.SpawnAmmo(T.position, T.rotation, 0);
                 bullet.GetComponent<Bullet>().affil = 0;
-                bullet.GetComponent<Bullet>().lifetime = 0.5f;
+                bullet.GetComponent<Bullet>().lifetime = 1f;
                 bullet.GetComponent<Bullet>().enabled = false;
                 bullet.GetComponent<Bullet>().enabled = true;
                 bullet.eulerAngles = new Vector3(0, bullet.eulerAngles.y, 0);
+                bullet.GetComponent<Bullet>().enabled = false;
+                bullet.GetComponent<Bullet>().enabled = true;
             }
             canFire = false;
             Invoke("EnableFire", shotDelay);

@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 1604122760134995087}
   - component: {fileID: 7274512039579125472}
   - component: {fileID: 1604122760134995077}
+  - component: {fileID: 4789841111001569777}
   m_Layer: 7
   m_Name: EnemyQueen
   m_TagString: Untagged
@@ -221,6 +222,28 @@ MonoBehaviour:
   _hp: 3000
   affil: 0
   invulnTime: 0.2
+--- !u!114 &4789841111001569777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604122760134995076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901bf8fbd0fc53746a31c07c78a076f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotDelay: 2
+  shotsPerBurst: 5
+  attacks: 0300000001000000000000000100000002000000
+  attackInd: 0
+  turretTransforms:
+  - {fileID: 5121431134624431377}
+  - {fileID: 1010755821118831638}
+  - {fileID: 1010755821350541060}
+  spawnables:
+  - {fileID: 8305798741548600600, guid: d9cfdc77342da424fa1bb380ae2c1929, type: 3}
 --- !u!1 &1604122760854249615
 GameObject:
   m_ObjectHideFlags: 0
