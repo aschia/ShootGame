@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour
     public float[] intervalMultis = null;
     private Transform origin = null;
 
+    bool hasSpawnedQueen = false;
+
     private void Awake()
     {
         origin = GameObject.FindGameObjectWithTag("Player").transform;
@@ -23,7 +25,7 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
-        if (origin == null) return;
+        if (origin == null || interval == -1) return;
 
         int spawnChoice = Random.Range(0, spawnObj.Length);
 

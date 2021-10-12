@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     public static bool isPlayerDead = false;
     public GameObject Player = null;
     public bool bossDefeated = false;
+    public Spawner sp = null;
 
     void Awake()
     {
@@ -56,6 +58,10 @@ public class GameManager : MonoBehaviour
             if (Player != null) HealthText.text = healthPrefix + Player.gameObject.GetComponent<Health>().hp.ToString();
             else HealthText.text = "Health: 0";
         }
+        if (Score >= 5000 && SceneManager.GetActiveScene() != SceneManager.GetSceneByName("SampleScene2") )
+        {
+            SceneManager.LoadScene("SampleScene2");
+        }
     }
 
     public static void GameOver()
@@ -65,6 +71,16 @@ public class GameManager : MonoBehaviour
             gm.GameOverText.gameObject.SetActive(true);
             if (gm.bossDefeated) gm.GameOverText.text = "YOU WIN!\n<size=48>Score: " + Score + "</size>";
             else gm.GameOverText.text = "GAME OVER\n<size=48>Score: " + Score+"</size>";
+        }
+
+        if (gm.sp != null)
+        {
+            GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject g in gos)
+            {
+                g.GetComponent<Health>().hp = 0;
+            }
+            gm.sp.interval = -1;
         }
 
         if (isPlayerDead)

@@ -130,7 +130,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.GameOver();
-        GameManager.isPlayerDead = true;
+        if (GetComponent<Health>().hp <= 0)
+        {
+            GameManager.GameOver();
+            GameManager.isPlayerDead = true;
+        }
     }
 }

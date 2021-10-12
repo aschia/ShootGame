@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 4789841111001569777}
   m_Layer: 7
   m_Name: EnemyQueen
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21aa44fb4d643da4291ee016baff06d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 200
+  scoreValue: 20000
 --- !u!114 &1604122760134995087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   destroyOnDeath: 1
   canBeHit: 1
   deathPartiPrefab: {fileID: 6152200297220633451, guid: 59a531cda16e6da4280c4e06243b77b5, type: 3}
-  _hp: 3000
+  _hp: 2000
   affil: 0
   invulnTime: 0.2
 --- !u!114 &4789841111001569777
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotDelay: 2
   shotsPerBurst: 5
-  attacks: 0300000001000000000000000100000002000000
+  attacks: 0000000001000000000000000100000002000000
   attackInd: 0
   turretTransforms:
   - {fileID: 5121431134624431377}
@@ -244,6 +244,7 @@ MonoBehaviour:
   - {fileID: 1010755821350541060}
   spawnables:
   - {fileID: 8305798741548600600, guid: d9cfdc77342da424fa1bb380ae2c1929, type: 3}
+  sp: {fileID: 0}
 --- !u!1 &1604122760854249615
 GameObject:
   m_ObjectHideFlags: 0

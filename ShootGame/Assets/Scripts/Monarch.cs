@@ -15,17 +15,32 @@ public class Monarch : MonoBehaviour
 
     public Transform[] turretTransforms;
     public GameObject[] spawnables;
+    public Spawner sp;
+    bool sp_active = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Invoke("EnableFire", shotDelay);
         mv = GetComponent<Mover>();
+        sp.interval = -1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!sp_active && GetComponent<Health>().hp <= GetComponent<Health>().hp * 0.66)
+        {
+            sp_active = true;
+            sp.interval = 2;
+        }
+
+        /*GameManager.GM.bossDefeated = true;
+        if (GetComponent<Health>().hp <= 0)
+        {
+            GameManager.GameOver();
+        }*/
+
         if (canFire)
         {
             Transform bullet = null;
@@ -85,20 +100,36 @@ public class Monarch : MonoBehaviour
                     cooldown = shotDelay*2 / shotsPerBurst;
                 break;
 
-                case 3:
+                /*case 3:
                     int spawnChoice = Random.Range(0, spawnables.Length);
                     Vector3 startpos = (transform.position - Vector3.one / shotsPerBurst / 2);
                     for (int i = 0; i < shotsPerBurst; i++)
                     {
                         Vector3 pos = startpos + (Vector3.one * i / shotsPerBurst);
-                        Instantiate(spawnables[spawnChoice], pos, Quaternion.identity);
+                        GameObject tr = Instantiate(spawnables[spawnChoice], pos, Quaternion.identity);
+                        tr.transform.position = new Vector3(tr.transform.position.x, 0, tr.transform.position.z);
                     }
-                break;
+                    canFire = false;
+                break;*/
             }
         }
     }
 
-    private void FixedUpdate()
+    /*private void Update()
+    {
+        if (!sp_active && GetComponent<Health>().hp <= GetComponent<Health>().hp*0.66)
+        {
+            sp_active = true;
+            sp.interval = 2;
+        }
+
+        GameManager.GM.bossDefeated = true;
+        if (GetComponent<Health>().hp <= 0)
+        {
+            GameManager.GameOver();
+        }
+    }*/
+    private void OnDestroy()
     {
         GameManager.GM.bossDefeated = true;
         if (GetComponent<Health>().hp <= 0)
